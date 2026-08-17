@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simple</title>
+    <style>
+        /* Estilos generales para centrar la calculadora */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        /* Estilo de la "caja" de la calculadora */
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+            width: 250px;
+        }
+
+        /* Pantalla donde se muestran los números */
+        #display {
+            width: 100%;
+            height: 50px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 15px;
+            padding: 5px 10px;
+            box-sizing: border-box;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            color: #333;
+        }
+
+        /* Cuadrícula para los botones */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        /* Estilo general de los botones */
+        button {
+            height: 50px;
+            font-size: 20px;
+            border: none;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: #333;
+        }
+
+        button:hover {
+            background-color: #e2e6ea;
+        }
+
+        /* Colores especiales para operadores y acciones */
+        .operator {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .operator:hover {
+            background-color: #e68a00;
+        }
+
+        .equal {
+            background-color: #4caf50;
+            color: white;
+            grid-column: span 2; /* Ocupa dos columnas */
+        }
+
+        .equal:hover {
+            background-color: #45a049;
+        }
+
+        .clear {
+            background-color: #f44336;
+            color: white;
+            grid-column: span 2; /* Ocupa dos columnas */
+        }
+
+        .clear:hover {
+            background-color: #da190b;
+        }
+
+        .zero {
+            grid-column: span 2; /* El cero ocupa dos columnas */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <!-- Pantalla de la calculadora -->
+        <input type="text" id="display" disabled>
+        
+        <!-- Botones -->
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="operator" onclick="appendToDisplay('/')">÷</button>
+            <button class="operator" onclick="appendToDisplay('*')">×</button>
+
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button class="operator" onclick="appendToDisplay('-')">−</button>
+
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button class="operator" onclick="appendToDisplay('+')">+</button>
+
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button class="equal" onclick="calculate()">=</button>
+
+            <button class="zero" onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+        </div>
+    </div>
+
+    <!-- Script de JavaScript incrustado -->
+    <script>
+        // Obtenemos el elemento de la pantalla
+        const display = document.getElementById('display');
+
+        // Función para añadir números u operadores a la pantalla
+        function appendToDisplay(value) {
+            display.value += value;
+        }
+
+        // Función para borrar todo (botón C)
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        // Función para calcular el resultado (botón =)
+        function calculate() {
+            try {
+                // eval() procesa la cadena de texto como una operación matemática
+                // Se reemplazan visualmente en HTML (÷ y ×) pero en el código enviamos / y *
+                display.value = eval(display.value);
+            } catch (error) {
+                // Si hay un error matemático (ej. formato inválido), mostramos "Error"
+                display.value = 'Error';
+            }
+        }
+    </script>
+
+</body>
+</html>
