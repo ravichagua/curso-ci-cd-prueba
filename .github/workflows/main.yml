@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. Descargar el código del repositorio
+    # 1. Descargar el código del repositorio - prueba 1
     - name: Checkout del código
       uses: actions/checkout@v4
 
@@ -40,5 +40,5 @@ jobs:
         mkdir -p staging_dir
         cp -r *.py staging_dir/
         ls -la ./staging_dir
-	echo "Archivos copiados exitosamente a staging_dir/"
+        echo "Archivos copiados exitosamente a staging_dir/"
         echo "¡Despliegue exitoso!"
